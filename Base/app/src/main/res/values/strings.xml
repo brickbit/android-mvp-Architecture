@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Base</string>
+    <string name="default_error">Se ha producido un error en la aplicación</string>
+    <string name="error_get_course">Se ha producido un error al obtener los cursos</string>
+</resources>
