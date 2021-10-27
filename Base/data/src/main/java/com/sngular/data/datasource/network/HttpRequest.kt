@@ -1,12 +1,13 @@
 package com.sngular.data.datasource.network
 
-import com.sngular.domain.model.Either
-import com.sngular.domain.model.Result
 
-suspend fun <R> execute(f: suspend () -> R): Either<Result.Error, R> =
+inline fun <R, reified E: Throwable> execute(f: () -> R): Result<R>? =
     try {
-        Either.Right(f())
+        Result.success(f())
     } catch (requestError: Throwable) {
-        val error: Result.Error = Result.Error.Default(requestError.message ?: "")
-        Either.Left(error)
+        if(requestError is E) {
+            Result.failure(requestError)
+        } else {
+            null
+        }
     }

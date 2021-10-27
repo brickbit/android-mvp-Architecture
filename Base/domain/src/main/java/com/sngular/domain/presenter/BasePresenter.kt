@@ -1,10 +1,8 @@
 package com.sngular.domain.presenter
 
 import com.sngular.domain.contractor.BaseContractor
-import com.sngular.domain.model.Either
 import com.sngular.domain.error.ErrorManager
 import com.sngular.domain.executor.CoroutineExecutor
-import com.sngular.domain.model.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.withContext
@@ -23,7 +21,7 @@ abstract class BasePresenter<out V : BaseContractor>(
 
     fun stop() = job.cancel()
 
-    protected suspend fun <T> execute(f: suspend () -> Either<Result.Error, T>): Either<Result.Error, T> =
+    protected suspend fun <T> execute(f: suspend () -> Result<T>): Result<T> =
         withContext(executor.io) { f() }
 
 }

@@ -3,7 +3,7 @@ package com.sngular.domain.presenter
 import com.sngular.domain.contractor.MainContractor
 import com.sngular.domain.error.ErrorManager
 import com.sngular.domain.executor.CoroutineExecutor
-import com.sngular.domain.model.Result
+import com.sngular.domain.model.Output
 import com.sngular.domain.repository.CourseRepository
 import kotlinx.coroutines.launch
 
@@ -26,10 +26,11 @@ class MainPresenter(
         scope.launch {
             view.showProgress()
             execute { repository.getCourses() }.fold(
-                error = {
-                    val error = errorManager.convert(it as Result.Error.NetworkError)
-                    view.onGetCourseError(error) },
-                success = { view.onGetCourseSuccess(it) }
+                onFailure = {
+                    val error = errorManager.convert(it as Output.Error.NetworkError)
+                    view.onGetCourseError(error)
+                },
+                onSuccess = { view.onGetCourseSuccess(it) }
             )
             view.hideProgress()
         }
