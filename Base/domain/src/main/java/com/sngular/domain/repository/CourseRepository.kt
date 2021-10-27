@@ -5,5 +5,5 @@ import com.sngular.domain.model.Either
 import com.sngular.domain.model.Result
 
 interface CourseRepository {
-    suspend fun getCourses(): Either<Result.Result.Error, List<CourseDto>>
+    suspend fun getCourses(): Either<Result.Error, List<CourseDto>>
 }

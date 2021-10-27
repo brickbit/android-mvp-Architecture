@@ -27,8 +27,8 @@ class MainPresenter(
             view.showProgress()
             execute { repository.getCourses() }.fold(
                 error = {
-                    val a = errorManager.convert(it as Result.Result.Error.GetCourseError)
-                    view.onGetCourseError(a) },
+                    val error = errorManager.convert(it as Result.Error.NetworkError)
+                    view.onGetCourseError(error) },
                 success = { view.onGetCourseSuccess(it) }
             )
             view.hideProgress()

@@ -6,6 +6,7 @@ import com.sngular.data.constants.Constant.Companion.endpointUrl
 import com.sngular.data.constants.buildType
 import com.sngular.data.model.CourseDao
 import com.sngular.data.model.ListCoursesDao
+import retrofit2.Response
 
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -17,5 +18,5 @@ interface ApiInterface {
 
     @GET(Constant.GET_COURSES)
     suspend fun getCourses(
-    ): ListCoursesDao
+    ): Response<ListCoursesDao>
 }

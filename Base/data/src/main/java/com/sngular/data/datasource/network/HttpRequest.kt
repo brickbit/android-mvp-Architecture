@@ -1,7 +1,7 @@
 package com.sngular.data.datasource.network
 
 import com.sngular.domain.model.Either
-import com.sngular.domain.model.Result.Result
+import com.sngular.domain.model.Result
 
 suspend fun <R> execute(f: suspend () -> R): Either<Result.Error, R> =
     try {
